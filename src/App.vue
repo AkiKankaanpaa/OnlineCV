@@ -1,20 +1,29 @@
+
+
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+  import { ref } from "vue"
+  import NavBar from "./components/NavBar.vue"
+  import Resume from "./components/Resume.vue"
+  import Projects from "./components/Projects.vue"
+  import About from "./components/About.vue"
+
+  import Landing from "./components/Landing.vue"
+
+  const currentPage = ref("LANDING")
+
+  function changePage(newPage) {
+    currentPage.value = newPage
+  }
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <NavBar @changePage="changePage"></NavBar>
+  <div class="main">
+    <Landing v-if="currentPage == 'LANDING'"></Landing>
+    <Resume v-else-if="currentPage == 'RESUME'"></Resume>
+    <Projects v-else-if="currentPage == 'PROJECTS'"></Projects>
+    <About v-else-if="currentPage == 'ABOUT'"></About>
+  </div>
 </template>
 
 <style scoped>
@@ -45,3 +54,4 @@ header {
   }
 }
 </style>
+./components/pages.js
